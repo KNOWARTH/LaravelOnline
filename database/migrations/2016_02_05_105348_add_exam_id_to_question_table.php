@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUserResultTable extends Migration
+class AddExamIdToQuestionTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,17 +12,11 @@ class CreateUserResultTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_result', function (Blueprint $table) {
-            $table->increments('id');
-            $table->integer('exam_id')->unsigned();
-            $table->date('exam_date');
-            $table->integer('marks');
-            $table->boolean('result_status');
-            $table->timestamps();
-            
+        Schema::table('question', function (Blueprint $table) {
+            $table->integer('exam_id')->unsigned()->after('correct_ans');
         });
-
-       Schema::table('user_result', function($table) {
+        
+        Schema::table('question', function($table) {
             $table->foreign('exam_id')->references('id')->on('exam')->onDelete('cascade')->onUpdate('cascade');
            
         });
@@ -35,6 +29,8 @@ class CreateUserResultTable extends Migration
      */
     public function down()
     {
-        Schema::drop('user_result');
+        Schema::table('question', function (Blueprint $table) {
+            //
+        });
     }
 }
