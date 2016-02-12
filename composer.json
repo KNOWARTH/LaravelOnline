@@ -8,7 +8,11 @@
         "php": ">=5.5.9",
         "laravel/framework": "5.2.*",
         "filp/whoops": "^2.0",
-        "laravelcollective/html": "~5.0"
+        "laravelcollective/html": "~5.0",
+        "gbrock/laravel-table": "dev-master",
+        "nicolaslopezj/searchable": "1.*",
+        "kodeine/laravel-acl": "~1.0@dev",
+        "laracasts/flash": "1.*"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

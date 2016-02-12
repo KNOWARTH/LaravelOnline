@@ -2,8 +2,12 @@
 
 @section('content')
 <div class="container">
+    @include('flash::message')
+</div>
+<div class="container">
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
+        <?php echo $result1 ?>
             <div class="panel panel-default">
                 <div class="panel-heading"><b>Add Question</b></div>
 
@@ -33,17 +37,13 @@
                                     <td>{{ $i++ }}</td>
                                     <td>{{ $result->exam_name }}</td>
                                     <td>{{ $result->total_question }}</td>
-                                    <td>#</td>
+                                    <td>{{ $result->id }}</td>
                                     <td>#</td>
                                     <td>
                                         {{ HTML::link('add_question_exam/'.$result->id, "Add" , array('class' => 'btn btn-primary'))}}
                                     </td>
                                 <tbody>
                                 @endforeach
-
-
-                               
-
                             </table>
                         </div>
                     </div>

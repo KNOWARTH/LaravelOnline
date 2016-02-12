@@ -2,6 +2,9 @@
 
 @section('content')
 <div class="container">
+    @include('flash::message')
+</div>
+<div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
@@ -10,6 +13,10 @@
                     <form class="form-horizontal" role="form" method="POST" action="{{ url('registeradmin') }}">
                         {!! csrf_field() !!}
                         {{ Form::hidden('status',1) }}
+
+                        <div class="row">
+                        {{ HTML::link('/admin', "" , array('class' => 'btn btn-primary glyphicon glyphicon-arrow-left pull-right'))}}
+                        </div>
 
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                             <label class="col-md-4 control-label">Name</label>
@@ -81,4 +88,23 @@
         </div>
     </div>
 </div>
+<div class="container">
+ <div class="row">
+  <div class="col-md-8 col-md-offset-2">
+  <div class="panel panel-default">
+    <div class="panel-heading"><b>Administrators List</b></div>
+        <div class="panel-body">
+
+            <div class="row">
+            <div class="table-responsive">
+            <div align="center"> <?php echo $result->render(); ?></div>
+            </div>
+            </div>
+
+        </div>
+  </div>      
+ </div>
+ </div>
+</div>
+
 @endsection

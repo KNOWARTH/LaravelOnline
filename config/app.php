@@ -156,6 +156,12 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         'Collective\Html\HtmlServiceProvider',
+        'Gbrock\Table\Providers\TableServiceProvider',
+        'Illuminate\Foundation\Providers\ArtisanServiceProvider',
+        'Illuminate\Auth\AuthServiceProvider',
+        Kodeine\Acl\AclServiceProvider::class,
+        'Laracasts\Flash\FlashServiceProvider',
+
 
 
     ],
@@ -205,6 +211,8 @@ return [
         'View'      => Illuminate\Support\Facades\View::class,
         'Form' => 'Collective\Html\FormFacade',
         'HTML' => 'Collective\Html\HtmlFacade',
+        'Table'      => 'Gbrock\Table\Facades\Table',
+        'Flash' => 'Laracasts\Flash\Flash'
 
 
     ],
