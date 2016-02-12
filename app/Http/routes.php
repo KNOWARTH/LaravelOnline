@@ -1,11 +1,6 @@
 <?php
 
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-
 
 Route::group(['middleware' => 'web'], function () {
 
@@ -21,6 +16,42 @@ Route::group(['middleware' => 'web'], function () {
 		'auth' => 'Auth\AuthController',
 	   'password' => 'Auth\PasswordController',
 	]);
+	
 
-	Route::get('/home', 'HomeController@index');
+	// User Side Routes
+	Route::get('/', 'HomeController@index');
+	Route::get('exam','user\ExamController@exam');
+	Route::get('editprofile','user\ProfileController@editprofile_user');
+	Route::get('viewresult','user\ResultController@viewresult');
+	Route::get('admin','HomeController@admin');
+
+
+	// Admin Side Routes
+	Route::group(['namespace' => 'admin'], function(){
+	// DashboardRoutes
+	Route::get('admin','HomeController@index');
+	Route::get('home', 'HomeController@index');
+	// Manage Exams Routes
+	Route::get('manageexam','ExamController@index');
+	Route::get('createexam','ExamController@create');
+	Route::post('saveExam','ExamController@store');
+	Route::get('editExam/{id}','ExamController@edit');
+	Route::post('updateExam','ExamController@update');
+	Route::post('search', 'ExamController@search');
+	// Manage Profile Routes
+	Route::get('createadmin','ProfileController@index');
+	Route::get('editprofile','ProfileController@edit');
+	Route::post('registeradmin','ProfileController@store');
+	Route::post('updateprofile','ProfileController@update');
+	// Manage Questions Routes
+	Route::get('manageQuestions/{id}','QuestionController@index');
+	Route::get('add_question_exam/{id}','QuestionController@create');
+	Route::post('search', 'QuestionController@search');
+	Route::post('addquestion','QuestionController@store');
+	Route::post('updateQuestion','QuestionController@update');
+	Route::get('editQuestion/{id}','QuestionController@edit');
+	Route::get('deleteQuestion/{id}','QuestionController@destroy');
+
+	});
+
 });

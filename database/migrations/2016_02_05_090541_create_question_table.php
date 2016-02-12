@@ -12,7 +12,7 @@ class CreateQuestionTable extends Migration
      */
     public function up()
     {
-        Schema::create('create_question', function (Blueprint $table) {
+        Schema::create('question', function (Blueprint $table) {
             $table->increments('id');
             $table->longText('question');
             $table->longText('opt_a');
@@ -32,6 +32,6 @@ class CreateQuestionTable extends Migration
      */
     public function down()
     {
-        Schema::drop('create_question');
+        Schema::drop('question');
     }
 }
