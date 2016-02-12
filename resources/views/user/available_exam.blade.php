@@ -1,79 +1,46 @@
 @extends('layouts.app')
 
+@if (count($errors) > 0)
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
 @section('content')
 <div class="container">
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
-                <div class="panel-heading">Available Exam</div>
+                <div class="panel-heading"><b>Available Exam</b></div>
 
                 <div class="panel-body">
-                    {{ Form::open(array('url' => '', 'method' => 'post')) }}
-                    {{ csrf_field() }}
                     <!-- Collapse Start -->
-                    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-                      <div class="panel panel-default">
-                        <div class="panel-heading" role="tab" id="headingOne">
-                          <h4 class="panel-title">
-                            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                              HTML
-                            </a>
-                          </h4>
-                        </div>
+                    @foreach($result as $val) 
+                      <div class="panel-group" id="{{$val->id}}" role="tablist" aria-multiselectable="true">
+                        <div class="panel panel-default">
+                          <div class="panel-heading" role="tab" id="{{$val->id}}">
+                            <h4 class="panel-title">
+                              <a role="button" data-toggle="{{$val->id}}" data-parent="#{{$val->id}}" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                {{$val->exam_name}}
+                              </a>
+                            </h4>
+                          </div>
 
-                        <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
-                          <div class="panel-body">
-                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-
-                            <div class="text-right">
-                                <input type="submit" name="html" class="btn btn-primary" value="Start Exam"/>
+                          <div id="collapseOne" class="panel-collapse {{$val->id}}" role="tabpanel" aria-labelledby="{{$val->id}}">
+                            <div class="panel-body">
+                              {{$val->description}}
+                              <div class="text-right">
+                                  {{ HTML::link($val->id.'/startexam', "Start Exam" , array('class' => 'btn btn-primary'))}}
+                              </div>
                             </div>
                           </div>
                         </div>
-                      </div>
-
-                      <div class="panel panel-default">
-                        <div class="panel-heading" role="tab" id="headingTwo">
-                          <h4 class="panel-title">
-                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                              PHP
-                            </a>
-                          </h4>
-                        </div>
-
-                        <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-                          <div class="panel-body">
-                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-
-                            <div class="text-right">
-                                <input type="submit" name="php" class="btn btn-primary" value="Start Exam"/>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div class="panel panel-default">
-                        <div class="panel-heading" role="tab" id="headingThree">
-                          <h4 class="panel-title">
-                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                              jQuery
-                            </a>
-                          </h4>
-                        </div>
-
-                        <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-                          <div class="panel-body">
-                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-
-                            <div class="text-right">
-                                <input type="submit" name="jquery" class="btn btn-primary" value="Start Exam"/>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <!-- Collapse End -->
-                    {{ Form::close() }}
+                      @endforeach
+                      <!-- Collapse End -->
                 </div>
             </div>
         </div>

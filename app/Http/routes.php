@@ -22,7 +22,9 @@ Route::group(['middleware' => 'web'], function () {
 	Route::get('/', 'HomeController@index');
 	Route::get('exam','user\ExamController@exam');
 	Route::get('editprofile','user\ProfileController@editprofile_user');
+	Route::post('updateUserProfile','user\ProfileController@updateprofile');
 	Route::get('viewresult','user\ResultController@viewresult');
+
 	Route::get('admin','HomeController@admin');
 
 
@@ -53,5 +55,11 @@ Route::group(['middleware' => 'web'], function () {
 	Route::get('deleteQuestion/{id}','QuestionController@destroy');
 
 	});
+
+
+
+	Route::get('{id}/startexam','user\ExamController@selectexam');
+	Route::post('/saveanswer','user\ExamController@saveanswer');
+	Route::any('/showresult','user\ExamController@showresult');
 
 });
