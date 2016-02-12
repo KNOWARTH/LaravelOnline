@@ -10,21 +10,15 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-sm-3 col-sm-offset-1">
-                            <a href="exam">
-                            {{ HTML::image('assests/img/exam.jpg','Exam',array('class' => 'img-thumbnail img-responsive')) }}
-                            </a>
+                            <a href="exam" class="btn btn-primary">Exam</a>
                         </div>
 
                         <div class="col-sm-3 col-sm-offset-1">
-                            <a href="editprofile">
-                            {{ HTML::image('assests/img/edit_profile.png','Edit Profile',array('class' => 'img-thumbnail img-responsive')) }}
-                            </a>
+                            <a href="viewresult" class="btn btn-primary">View Result</a>
                         </div>
-
+                        
                         <div class="col-sm-3 col-sm-offset-1">
-                            <a href="viewresult">
-                            {{ HTML::image('assests/img/result.png','Edit Profile',array('class' => 'img-thumbnail img-responsive')) }}
-                            </a>
+                            <a href="editprofile" class="btn btn-primary">Edit Profile</a>
                         </div>
                     </div>
                 </div>

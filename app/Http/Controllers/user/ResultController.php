@@ -16,6 +16,9 @@ class ResultController extends Controller
     
     public function viewresult()
     {
+    	echo "hello"; exit;
+    	$user_id=\Auth::id();
+    	
         return view('user.view_result');      
     }
 }

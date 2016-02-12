@@ -31,6 +31,7 @@ Route::group(['middleware' => 'web'], function () {
 	// User Side Routes
 	Route::get('exam','user\ExamController@exam');
 	Route::get('editprofile','user\ProfileController@editprofile_user');
+	Route::post('updateUserProfile','user\ProfileController@updateprofile');
 	Route::get('viewresult','user\ResultController@viewresult');
 
 	// Admin SIde Routes
@@ -38,11 +39,16 @@ Route::group(['middleware' => 'web'], function () {
 	Route::get('createexam','admin\ExamController@create');
 	Route::post('saveCreateExam','admin\ExamController@store');
 	Route::post('updateExamStatus','admin\ExamController@updateStatus');
-	Route::get('editprofile','admin\ProfileController@editprofile_admin');
+	// Route::get('editprofile','admin\ProfileController@editprofile_admin');
 	Route::get('createquestion','admin\QuestionController@create');
 	Route::get('add_question_exam/{id}','admin\QuestionController@createQuestion');
 	Route::post('addquestion','admin\QuestionController@store');
 	Route::get('createadmin','admin\ProfileController@create');
 	Route::post('registeradmin','admin\ProfileController@store');
+
+
+	Route::get('{id}/startexam','user\ExamController@selectexam');
+	Route::post('/saveanswer','user\ExamController@saveanswer');
+	Route::any('/showresult','user\ExamController@showresult');
 
 });
