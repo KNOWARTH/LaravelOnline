@@ -2,6 +2,9 @@
 
 @section('content')
 <div class="container">
+    @include('flash::message')
+</div>
+<div class="container">
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
@@ -14,23 +17,21 @@
                         </div>
 
                         <div class="col-sm-2 col-sm-offset-1">
-                            {{ HTML::link('createexam', 'Create Exam', array('class' => 'btn btn-primary'))}}
-                        </div>
-
-                        <div class="col-sm-2 col-sm-offset-1">
                             {{ HTML::link('editprofile', 'Edit Profile', array('class' => 'btn btn-primary'))}}
                         </div>
 
-                        <div class="col-sm-2 col-sm-offset-1">
+                        <!-- <div class="col-sm-2 col-sm-offset-1">
                          {{ HTML::link('createquestion', 'Create Questions', array('class' => 'btn btn-primary'))}}
-                        </div>
-                    </div>
+                        </div> -->
 
-                    <div class="row" style="margin-top:20px;">
                         <div class="col-sm-2 col-sm-offset-1">
                          {{ HTML::link('createadmin', 'Create New Admin', array('class' => 'btn btn-primary'))}}
                         </div>
                     </div>
+
+<!--                     <div class="row" style="margin-top:20px;">
+                        
+                    </div> -->
                 </div>
             </div>
         </div>

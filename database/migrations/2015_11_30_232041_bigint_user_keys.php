@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddExamIdToCreateQuestionTable extends Migration
+class BigintUserKeys extends Migration
 {
     /**
      * Run the migrations.
@@ -12,8 +12,8 @@ class AddExamIdToCreateQuestionTable extends Migration
      */
     public function up()
     {
-        Schema::table('create_question', function (Blueprint $table) {
-            $table->integer('exam_id')->after('correct_ans');
+        Schema::table('role_user', function (Blueprint $table) {
+            $table->bigInteger("user_id")->unsigned()->change();
         });
     }
 
@@ -24,8 +24,8 @@ class AddExamIdToCreateQuestionTable extends Migration
      */
     public function down()
     {
-        Schema::table('create_question', function (Blueprint $table) {
-            //
+        Schema::table('role_user', function (Blueprint $table) {
+            $table->integer("user_id")->unsigned()->change();
         });
     }
 }

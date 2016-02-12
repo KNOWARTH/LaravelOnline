@@ -11,46 +11,70 @@ use App\Http\Controllers\Controller;
 
 class ProfileController extends Controller
 {
+    //Check Authentication.
 	public function __construct()
     {
         $this->middleware('auth');
     }
-    
-    public function editprofile_admin()
+
+    //Display Admin Registration page with list of Admin.
+    public function index()
     {
-    	return view('admin.edit_profile');	
+        $result = user::where('status',1)->sorted()->paginate(5);
+        $table = \Table::create($result, ['name','email']);
+        return view('admin.admin_registration')->with('result',$table);
     }
 
-    public function create()
+    //Show the EditProfile form for editing the specified resource.
+    public function edit()
     {
-        return view('admin.admin_registration');
+        $id = \Auth::id(); 
+        $currentuser = User::find($id); 
+        return view('admin.edit_profile')->with('result',$currentuser);
     }
 
+    // Store a newly created Admin resource in storage.
     public function store(Request $request)
     {
-        $rules =array('name' => 'required',
-                    'email' => 'required|email|unique:users',
-                    'password' =>'required||confirmed|min:6',
-                );
-    	$post = $request->all();
-    	$validator = Validator::make($request->all(),$rules);
+        $post = $request->all();
+        $validator=user::validateData($post);
         if ($validator->fails()) {
-            $this->throwValidationException(
-                $request, $validator
-            );
-        }
-        else{
+            $this->throwValidationException($request, $validator);
+        }else{
             unset($post['_token'],$post['password_confirmation']);
             $user = new user;
             foreach ($post as $key => $value){
                 $user->$key = $value;
             }
             $result = $user->save();
-            //$result = exam::insert($post);
             if($result>0){
-                Session::flash('message','Exam successfully inserted');       
+                Flash::success('Profile successfully inserted');      
             }
             return redirect('admin');
         }
     }
+
+    //Update the Admin Profile in storage.
+    public function update(Request $request)
+    {
+        $post = $request->all();
+        $validator=user::validateUpdateData($post);
+        if ($validator->fails()){
+             return redirect()->back()->withErrors($validator->errors());
+        }else{
+            $currentpassword = \Auth::user()->password;
+            if (\Hash::check($post['password'], $currentpassword)) {
+                unset($post['_token'],$post['password']);
+                $result = user::where('id',$post['id'])->update($post);
+                if($result>0){
+                    Flash::success('Profile successfully updated');    
+                }
+                return redirect('admin');
+            }else{
+                return redirect()->back()->withErrors('Wrong Password');
+            }
+            
+        }
+    }
+
 }
